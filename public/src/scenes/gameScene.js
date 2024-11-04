@@ -1,5 +1,8 @@
 import {getSocket} from "../sockets/socket.js";
 
+const DURATION = 500;
+const NUMBER_CARD = 8;
+
 class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameScene' });
@@ -53,7 +56,7 @@ class GameScene extends Phaser.Scene {
     }
 
     dealCards() {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < NUMBER_CARD; i++) {
             this.playerHand.push(this.deck.pop());
             this.computerHand.push(this.deck.pop());
         }
@@ -162,13 +165,12 @@ class GameScene extends Phaser.Scene {
     }
 
     nextTurn(playerType) {
-        console.log(this.playerHand,'this.playerHand')
-        console.log(this.computerHand,'this.computerHand')
+
         if (this.playerHand.length > 0 && this.computerHand.length > 0) {
             if (playerType === 'player') {
-                this.time.delayedCall(500, () => this.computerTurn(), [], this);
+                this.time.delayedCall(DURATION, () => this.computerTurn(), [], this);
             } else {
-                this.time.delayedCall(500, () => {
+                this.time.delayedCall(DURATION, () => {
                     this.clearTable();
                     this.isInteracting = true;
                 }, [], this);
@@ -187,7 +189,7 @@ class GameScene extends Phaser.Scene {
             this.tweens.add({
                 targets: cardImage,
                 alpha: 0,
-                duration: 500,
+                duration: DURATION,
                 onComplete: () => {
                     cardImage.destroy();
                 }
