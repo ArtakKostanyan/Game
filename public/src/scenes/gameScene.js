@@ -80,7 +80,6 @@ class GameScene extends Phaser.Scene {
                 const computerCardImage = this.add.image(150 + (i * 100), 100, 'back').setScale(0.5);
                 computerCardImage.cardKey = cardKey;
                 computerCardImage.setName(`computer_back_${cardKey}`);
-                computerCardImage.setInteractive();
                 this.setupCardInteractions(computerCardImage, cardKey);
             }
         });
